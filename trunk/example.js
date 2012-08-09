@@ -6,20 +6,13 @@ var mouseY = 0;
 
 function squareExample() {
     var p = ConvexPolygon.fromRectangle(400, 400);
-    var seeds = [{point: new Point(150, 150), weight: 0},
+    var cells = [{point: new Point(150, 150), weight: 0},
 		 {point: new Point(250, 240), weight: 0},
 		 {point: new Point(150, 280), weight: 0},
 		 {point: new Point(280, 202), weight: 0},
 		 ];
-    ConvexPolygon.calculateVoronoiPolygons(seeds, p);
-    console.log(seeds);
-    var n = seeds.length;
-    for (var i = 0; i < n; ++i) {
-	p = seeds[i].polygon;
-	p.fill(context,
-	       "rgb(255, 0, 0)",
-	       "rgb(0, 0, 0)", 1);
-    }
+    calculateVoronoiDiagram(cells, p);
+    renderVoronoiDiagram(cells, context);
 }
 
 function mouseChopExample() {
@@ -38,6 +31,31 @@ function mouseChopExample() {
     context.stroke();
 }
 
+function colorsAndLabelsExample() {
+    var cells = [{point: new Point(150, 150),
+		  weight: 0,
+		  fillColor: "rgb(255, 0, 0)",
+		  label: ""
+	          },
+                 {point: new Point(250, 240),
+		  weight: 0,
+		  fillColor: "rgb(255, 255, 0)",
+		  label: ""
+	          },
+                 {point: new Point(150, 280),
+		  weight: 0,
+		  fillColor: "rgb(0, 255, 0)",
+		  label: ""
+	          },
+                 {point: new Point(280, 202),
+		  weight: 0,
+		  fillColor: "rgb(0, 0, 255)",
+		  label: ""
+	          },
+		 ];
+    makeVoronoiDiagram("voronoi", cells);
+}
+
 function handleMouseMove() {
     mouseX = event.clientX;
     mouseY = event.clientY;
@@ -45,5 +63,6 @@ function handleMouseMove() {
 
 function onload() {
     //squareExample();
-    setInterval("mouseChopExample()", 50);
+    //setInterval("mouseChopExample()", 50);
+    colorsAndLabelsExample();
 }

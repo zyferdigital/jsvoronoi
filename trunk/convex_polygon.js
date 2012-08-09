@@ -114,30 +114,8 @@ ConvexPolygon.prototype.clone = function() {
     return clone;
 };
 
-ConvexPolygon.calculateVoronoiPolygons = function(seeds, bounds) {
-    var n = seeds.length;
-    for (var i = 0; i < n; ++i) {
-	var seed = seeds[i];
-	if (seed.weight == undefined) {
-	    seed.weight = 0;
-	}
-    }
-    for (var i = 0; i < n; ++i) {
-	var thisSeed = seeds[i];
-	thisSeed.polygon = bounds.clone();
-	for (var j = 0; j < n; ++j) {
-	    if (i == j) {
-		continue;
-	    }
-	    var otherSeed = seeds[j];
-	    thisSeed.polygon.chop(thisSeed.point, thisSeed.weight,
-				  otherSeed.point, otherSeed.weight);
-	}
-    }
-};
-
-ConvexPolygon.prototype.fill = function(context, fillColor,
-					borderColor, borderWidth) {
+ConvexPolygon.prototype.drawThyself = function(context, fillColor,
+					       borderColor, borderWidth) {
     context.beginPath();
     var n = this.vertices.length;
     for (var i = 0; i < n; ++i) {
@@ -150,4 +128,4 @@ ConvexPolygon.prototype.fill = function(context, fillColor,
     context.lineWidth = borderWidth;
     context.fill();
     context.stroke();
-}
+};
