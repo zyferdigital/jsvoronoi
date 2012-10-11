@@ -32,27 +32,33 @@ function mouseChopExample() {
 }
 
 function colorsAndLabelsExample() {
-    var cells = [{point: new Point(150, 150),
-		  weight: 0,
-		  fillColor: "rgb(255, 0, 0)",
-		  label: ""
-	          },
-                 {point: new Point(250, 240),
-		  weight: 0,
-		  fillColor: "rgb(255, 255, 0)",
-		  label: ""
-	          },
-                 {point: new Point(150, 280),
-		  weight: 0,
-		  fillColor: "rgb(0, 255, 0)",
-		  label: ""
-	          },
-                 {point: new Point(280, 202),
-		  weight: 0,
-		  fillColor: "rgb(0, 0, 255)",
-		  label: ""
-	          },
-		 ];
+    var cells = [
+        {point: new Point(0, 0),
+         weight: 0,
+         fillColor: "rgb(255, 0, 0)",
+         label: ""
+        },
+        {point: new Point(300, 0),
+         weight: 0,
+         fillColor: "rgb(255, 255, 0)",
+         label: ""
+        },
+        {point: new Point(300, 300),
+         weight: 0,
+         fillColor: "rgb(0, 255, 0)",
+         label: ""
+        },
+        {point: new Point(0, 300),
+         weight: 0,
+         fillColor: "rgb(0, 0, 255)",
+         label: ""
+        },
+        {point: new Point(180, 180),
+         weight: 40,
+         fillColor: "rgb(255, 0, 255)",
+         label: ""
+        },
+    ];
     makeVoronoiDiagram("voronoi", cells);
 }
 

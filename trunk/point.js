@@ -90,7 +90,7 @@ Point.prototype.length = function() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
 };
 
-Point.prototype.clone = function() {
+Point.prototype.getDeepCopy = function() {
     return new Point(this.x, this.y);
 };
 

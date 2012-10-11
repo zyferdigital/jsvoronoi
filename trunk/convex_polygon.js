@@ -83,8 +83,10 @@ ConvexPolygon.prototype.chop = function(seed1, weight1, seed2, weight2) {
     var n = this.vertices.length;
     for (var i = 0; i < n; ++i) {
 	var thisVertex = this.getVertex(i);
-	var distance1 = thisVertex.squaredDistance(seed1) - weight1 * weight1;
-	var distance2 = thisVertex.squaredDistance(seed2) - weight2 * weight2;
+	//var distance1 = thisVertex.squaredDistance(seed1) - weight1 * weight1;
+	//var distance2 = thisVertex.squaredDistance(seed2) - weight2 * weight2;
+        var distance1 = thisVertex.distance(seed1) - weight1;
+        var distance2 = thisVertex.distance(seed2) - weight2;
 	if (distance1 < distance2) {
 	    newVertices.push(thisVertex);
 	}
@@ -104,14 +106,14 @@ ConvexPolygon.prototype.chop = function(seed1, weight1, seed2, weight2) {
     this.vertices = newVertices;
 };
 
-ConvexPolygon.prototype.clone = function() {
-    var clone = new ConvexPolygon();
+ConvexPolygon.prototype.getDeepCopy = function() {
+    var p = new ConvexPolygon();
     var n = this.vertices.length;
     for (var i = 0; i < n; ++i) {
-	var vertex = this.vertices[i];
-	clone.vertices.push(vertex.clone());
+	var v = this.vertices[i];
+	p.addVertex(v.x, v.y);
     }
-    return clone;
+    return p;
 };
 
 ConvexPolygon.prototype.drawThyself = function(context, fillColor,
