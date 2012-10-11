@@ -4,7 +4,7 @@ function calculateVoronoiDiagram(cells, bounds) {
     var n = cells.length;
     for (var i = 0; i < n; ++i) {
 	var thisSeed = cells[i];
-	thisSeed.polygon = bounds.clone();
+	thisSeed.polygon = bounds.getDeepCopy();
 	for (var j = 0; j < n; ++j) {
 	    if (i == j) {
 		continue;
@@ -14,6 +14,8 @@ function calculateVoronoiDiagram(cells, bounds) {
 				  otherSeed.point, otherSeed.weight);
 	}
     }
+    console.log(bounds);
+    console.log(cells);
 }
 
 function populateDefaultFieldValues(cells) {
