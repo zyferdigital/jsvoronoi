@@ -3,16 +3,16 @@
 function calculateVoronoiDiagram(cells, bounds) {
     var n = cells.length;
     for (var i = 0; i < n; ++i) {
-	var thisSeed = cells[i];
-	thisSeed.polygon = bounds.getDeepCopy();
-	for (var j = 0; j < n; ++j) {
-	    if (i == j) {
-		continue;
-	    }
-	    var otherSeed = cells[j];
-	    thisSeed.polygon.chop(thisSeed.point, thisSeed.weight,
-				  otherSeed.point, otherSeed.weight);
-	}
+        var thisSeed = cells[i];
+        thisSeed.polygon = bounds.getDeepCopy();
+        for (var j = 0; j < n; ++j) {
+            if (i == j) {
+                continue;
+            }
+            var otherSeed = cells[j];
+            thisSeed.polygon.chop(thisSeed.point, thisSeed.weight,
+                                  otherSeed.point, otherSeed.weight);
+        }
     }
     console.log(bounds);
     console.log(cells);
@@ -21,26 +21,35 @@ function calculateVoronoiDiagram(cells, bounds) {
 function populateDefaultFieldValues(cells) {
     var n = cells.length;
     for (var i = 0; i < n; ++i) {
-	var cell = cells[i];
-	if (cell.weight == undefined) {
-	    cell.weight = 0;
-	}
-	if (cell.fillColor == undefined) {
-	    cell.fillColor = "rgb(255, 255, 255)";
-	}
-	if (cell.borderColor == undefined) {
-	    cell.borderColor = "rgb(0, 0, 0)";
-	}
+        var cell = cells[i];
+        if (cell.weight == undefined) {
+            cell.weight = 0;
+        }
+        if (cell.fillColor == undefined) {
+            cell.fillColor = "rgb(255, 255, 255)";
+        }
+        if (cell.borderColor == undefined) {
+            cell.borderColor = "rgb(0, 0, 0)";
+        }
+        if (cell.label == undefined) {
+            cell.label = "";
+        }
     }
 }
 
 function renderVoronoiDiagram(cells, context) {
     var n = cells.length;
     for (var i = 0; i < n; ++i) {
-	var cell = cells[i];
-	cell.polygon.drawThyself(context,
-				 cell.fillColor,
-				 cell.borderColor, 1);
+        var cell = cells[i];
+        cell.polygon.drawThyself(context,
+                                 cell.fillColor,
+                                 cell.borderColor, 1);
+        var centroid = cell.polygon.centroid();
+        var textWidth = context.measureText(cell.label).width;
+        var textHeight = context.measureText("m").width;
+        context.strokeText(cell.label,
+                           centroid.x - textWidth,
+                           centroid.y - textHeight);
     }
 }
 

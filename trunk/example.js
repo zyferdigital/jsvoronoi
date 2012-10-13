@@ -54,7 +54,7 @@ function colorsAndLabelsExample() {
          label: ""
         },
         {point: new Point(180, 180),
-         weight: 40,
+         weight: 50,
          fillColor: "rgb(255, 0, 255)",
          label: ""
         },
